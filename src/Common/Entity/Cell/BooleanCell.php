@@ -25,4 +25,19 @@ final readonly class BooleanCell extends Cell
     {
         return $this->value;
     }
+
+    public function withValue(bool $value): self
+    {
+        return new self($value, $this->style, $this->comment);
+    }
+
+    public function withStyle(?Style $style): self
+    {
+        return new self($this->value, $style, $this->comment);
+    }
+
+    public function withComment(?Comment $comment): self
+    {
+        return new self($this->value, $this->style, $comment);
+    }
 }

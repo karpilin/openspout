@@ -30,4 +30,20 @@ final readonly class Border
     {
         return $this->parts;
     }
+
+    public function withBorderPart(BorderPart $borderPart): self
+    {
+        $parts = $this->parts;
+        $parts[$borderPart->name->value] = $borderPart;
+
+        return new self(...array_values($parts));
+    }
+
+    public function withoutBorderPart(BorderName $name): self
+    {
+        $parts = $this->parts;
+        unset($parts[$name->value]);
+
+        return new self(...array_values($parts));
+    }
 }

@@ -44,6 +44,11 @@ final readonly class Row
         return new self($cells, $this->height);
     }
 
+    public function withHeight(float $height): self
+    {
+        return new self($this->cells, $height);
+    }
+
     /**
      * @return non-negative-int
      */

@@ -95,4 +95,111 @@ final class CellTest extends TestCase
 
         self::assertTrue($cell->style->shouldWrapText);
     }
+
+    public function testStringCellWithValue(): void
+    {
+        $cell = new Cell\StringCell('original', null, null);
+        $newCell = $cell->withValue('modified');
+
+        self::assertSame('modified', $newCell->getValue());
+        self::assertSame('original', $cell->getValue());
+    }
+
+    public function testStringCellWithStyle(): void
+    {
+        $style1 = new Style(fontBold: true);
+        $style2 = new Style(fontItalic: true);
+        $cell = new Cell\StringCell('test', $style1, null);
+        $newCell = $cell->withStyle($style2);
+
+        self::assertTrue($newCell->style->fontItalic);
+        self::assertTrue($cell->style->fontBold);
+    }
+
+    public function testStringCellWithComment(): void
+    {
+        $comment1 = new Comment\Comment();
+        $comment2 = new Comment\Comment(visible: true);
+        $cell = new Cell\StringCell('test', null, $comment1);
+        $newCell = $cell->withComment($comment2);
+
+        self::assertTrue($newCell->comment->visible);
+        self::assertFalse($cell->comment->visible);
+    }
+
+    public function testNumericCellWithValue(): void
+    {
+        $cell = new Cell\NumericCell(42, null, null);
+        $newCell = $cell->withValue(100);
+
+        self::assertSame(100, $newCell->getValue());
+        self::assertSame(42, $cell->getValue());
+    }
+
+    public function testBooleanCellWithValue(): void
+    {
+        $cell = new Cell\BooleanCell(true, null, null);
+        $newCell = $cell->withValue(false);
+
+        self::assertFalse($newCell->getValue());
+        self::assertTrue($cell->getValue());
+    }
+
+    public function testFormulaCellWithValue(): void
+    {
+        $cell = new Cell\FormulaCell('=SUM(A1:A2)', null, null, null);
+        $newCell = $cell->withValue('=SUM(B1:B2)');
+
+        self::assertSame('=SUM(B1:B2)', $newCell->getValue());
+        self::assertSame('=SUM(A1:A2)', $cell->getValue());
+    }
+
+    public function testFormulaCellWithComputedValue(): void
+    {
+        $cell = new Cell\FormulaCell('=SUM(A1:A2)', 10, null, null);
+        $newCell = $cell->withComputedValue(20);
+
+        self::assertSame(20, $newCell->getComputedValue());
+        self::assertSame(10, $cell->getComputedValue());
+    }
+
+    public function testEmptyCellWithValue(): void
+    {
+        $cell = new Cell\EmptyCell(null, null, null);
+        $newCell = $cell->withValue('');
+
+        self::assertSame('', $newCell->getValue());
+        self::assertNull($cell->getValue());
+    }
+
+    public function testErrorCellWithRawValue(): void
+    {
+        $cell = new Cell\ErrorCell('#DIV/0', null, null);
+        $newCell = $cell->withRawValue('#N/A');
+
+        self::assertSame('#N/A', $newCell->getRawValue());
+        self::assertSame('#DIV/0', $cell->getRawValue());
+    }
+
+    public function testDateTimeCellWithValue(): void
+    {
+        $date1 = new DateTimeImmutable('2023-01-01');
+        $date2 = new DateTimeImmutable('2023-12-31');
+        $cell = new Cell\DateTimeCell($date1, null, null);
+        $newCell = $cell->withValue($date2);
+
+        self::assertSame($date2, $newCell->getValue());
+        self::assertSame($date1, $cell->getValue());
+    }
+
+    public function testDateIntervalCellWithValue(): void
+    {
+        $interval1 = new DateInterval('P1D');
+        $interval2 = new DateInterval('P2D');
+        $cell = new Cell\DateIntervalCell($interval1, null, null);
+        $newCell = $cell->withValue($interval2);
+
+        self::assertSame($interval2, $newCell->getValue());
+        self::assertSame($interval1, $cell->getValue());
+    }
 }
