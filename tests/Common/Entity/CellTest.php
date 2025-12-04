@@ -205,9 +205,9 @@ final class CellTest extends TestCase
 
     public function testStringCellCreate(): void
     {
-        $cell = Cell\StringCell::create('test');
+        $cell = Cell\StringCell::create('string');
 
-        self::assertSame('test', $cell->getValue());
+        self::assertSame('string', $cell->getValue());
         self::assertNull($cell->style);
         self::assertNull($cell->comment);
     }
