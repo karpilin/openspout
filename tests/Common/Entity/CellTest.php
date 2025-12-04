@@ -14,6 +14,7 @@ use OpenSpout\Common\Entity\Cell\ErrorCell;
 use OpenSpout\Common\Entity\Cell\FormulaCell;
 use OpenSpout\Common\Entity\Cell\NumericCell;
 use OpenSpout\Common\Entity\Cell\StringCell;
+use OpenSpout\Common\Entity\Comment\Comment;
 use OpenSpout\Common\Entity\Style\Style;
 use PHPUnit\Framework\TestCase;
 
@@ -98,7 +99,7 @@ final class CellTest extends TestCase
 
     public function testStringCellWithValue(): void
     {
-        $cell = new Cell\StringCell('original', null, null);
+        $cell = new StringCell('original', null, null);
         $newCell = $cell->withValue('modified');
 
         self::assertSame('modified', $newCell->getValue());
@@ -109,7 +110,7 @@ final class CellTest extends TestCase
     {
         $style1 = new Style(fontBold: true);
         $style2 = new Style(fontItalic: true);
-        $cell = new Cell\StringCell('test', $style1, null);
+        $cell = new StringCell('test', $style1, null);
         $newCell = $cell->withStyle($style2);
 
         self::assertTrue($newCell->style->fontItalic);
@@ -118,9 +119,9 @@ final class CellTest extends TestCase
 
     public function testStringCellWithComment(): void
     {
-        $comment1 = new Comment\Comment();
-        $comment2 = new Comment\Comment(visible: true);
-        $cell = new Cell\StringCell('test', null, $comment1);
+        $comment1 = new Comment();
+        $comment2 = new Comment(visible: true);
+        $cell = new StringCell('test', null, $comment1);
         $newCell = $cell->withComment($comment2);
 
         self::assertTrue($newCell->comment->visible);
@@ -129,7 +130,7 @@ final class CellTest extends TestCase
 
     public function testNumericCellWithValue(): void
     {
-        $cell = new Cell\NumericCell(42, null, null);
+        $cell = new NumericCell(42, null, null);
         $newCell = $cell->withValue(100);
 
         self::assertSame(100, $newCell->getValue());
@@ -138,7 +139,7 @@ final class CellTest extends TestCase
 
     public function testBooleanCellWithValue(): void
     {
-        $cell = new Cell\BooleanCell(true, null, null);
+        $cell = new BooleanCell(true, null, null);
         $newCell = $cell->withValue(false);
 
         self::assertFalse($newCell->getValue());
@@ -147,7 +148,7 @@ final class CellTest extends TestCase
 
     public function testFormulaCellWithValue(): void
     {
-        $cell = new Cell\FormulaCell('=SUM(A1:A2)', null, null, null);
+        $cell = new FormulaCell('=SUM(A1:A2)', null, null, null);
         $newCell = $cell->withValue('=SUM(B1:B2)');
 
         self::assertSame('=SUM(B1:B2)', $newCell->getValue());
@@ -156,7 +157,7 @@ final class CellTest extends TestCase
 
     public function testFormulaCellWithComputedValue(): void
     {
-        $cell = new Cell\FormulaCell('=SUM(A1:A2)', 10, null, null);
+        $cell = new FormulaCell('=SUM(A1:A2)', 10, null, null);
         $newCell = $cell->withComputedValue(20);
 
         self::assertSame(20, $newCell->getComputedValue());
@@ -165,7 +166,7 @@ final class CellTest extends TestCase
 
     public function testEmptyCellWithValue(): void
     {
-        $cell = new Cell\EmptyCell(null, null, null);
+        $cell = new EmptyCell(null, null, null);
         $newCell = $cell->withValue('');
 
         self::assertSame('', $newCell->getValue());
@@ -174,7 +175,7 @@ final class CellTest extends TestCase
 
     public function testErrorCellWithRawValue(): void
     {
-        $cell = new Cell\ErrorCell('#DIV/0', null, null);
+        $cell = new ErrorCell('#DIV/0', null, null);
         $newCell = $cell->withRawValue('#N/A');
 
         self::assertSame('#N/A', $newCell->getRawValue());
@@ -185,7 +186,7 @@ final class CellTest extends TestCase
     {
         $date1 = new DateTimeImmutable('2023-01-01');
         $date2 = new DateTimeImmutable('2023-12-31');
-        $cell = new Cell\DateTimeCell($date1, null, null);
+        $cell = new DateTimeCell($date1, null, null);
         $newCell = $cell->withValue($date2);
 
         self::assertSame($date2, $newCell->getValue());
@@ -196,7 +197,7 @@ final class CellTest extends TestCase
     {
         $interval1 = new DateInterval('P1D');
         $interval2 = new DateInterval('P2D');
-        $cell = new Cell\DateIntervalCell($interval1, null, null);
+        $cell = new DateIntervalCell($interval1, null, null);
         $newCell = $cell->withValue($interval2);
 
         self::assertSame($interval2, $newCell->getValue());
@@ -205,7 +206,7 @@ final class CellTest extends TestCase
 
     public function testStringCellCreate(): void
     {
-        $cell = Cell\StringCell::create('string');
+        $cell = StringCell::create('string');
 
         self::assertSame('string', $cell->getValue());
         self::assertNull($cell->style);
@@ -214,21 +215,21 @@ final class CellTest extends TestCase
 
     public function testNumericCellCreate(): void
     {
-        $cell = Cell\NumericCell::create(42);
+        $cell = NumericCell::create(42);
 
         self::assertSame(42, $cell->getValue());
     }
 
     public function testBooleanCellCreate(): void
     {
-        $cell = Cell\BooleanCell::create(true);
+        $cell = BooleanCell::create(true);
 
         self::assertTrue($cell->getValue());
     }
 
     public function testFormulaCellCreate(): void
     {
-        $cell = Cell\FormulaCell::create('=SUM(A1:A2)');
+        $cell = FormulaCell::create('=SUM(A1:A2)');
 
         self::assertSame('=SUM(A1:A2)', $cell->getValue());
         self::assertNull($cell->getComputedValue());
@@ -236,14 +237,14 @@ final class CellTest extends TestCase
 
     public function testEmptyCellCreate(): void
     {
-        $cell = Cell\EmptyCell::create();
+        $cell = EmptyCell::create();
 
         self::assertNull($cell->getValue());
     }
 
     public function testErrorCellCreate(): void
     {
-        $cell = Cell\ErrorCell::create('#DIV/0');
+        $cell = ErrorCell::create('#DIV/0');
 
         self::assertSame('#DIV/0', $cell->getRawValue());
         self::assertNull($cell->getValue());
@@ -252,7 +253,7 @@ final class CellTest extends TestCase
     public function testDateTimeCellCreate(): void
     {
         $date = new DateTimeImmutable('2023-01-01');
-        $cell = Cell\DateTimeCell::create($date);
+        $cell = DateTimeCell::create($date);
 
         self::assertSame($date, $cell->getValue());
     }
@@ -260,7 +261,7 @@ final class CellTest extends TestCase
     public function testDateIntervalCellCreate(): void
     {
         $interval = new DateInterval('P1D');
-        $cell = Cell\DateIntervalCell::create($interval);
+        $cell = DateIntervalCell::create($interval);
 
         self::assertSame($interval, $cell->getValue());
     }

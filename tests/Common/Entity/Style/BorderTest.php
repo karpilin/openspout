@@ -84,7 +84,7 @@ final class BorderTest extends TestCase
     {
         $leftPart = new BorderPart(BorderName::LEFT, Color::BLACK);
         $border = new Border($leftPart);
-        
+
         $rightPart = new BorderPart(BorderName::RIGHT, Color::RED);
         $topPart = new BorderPart(BorderName::TOP, Color::BLUE);
         $newBorder = $border->withBorderParts($rightPart, $topPart);

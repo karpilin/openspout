@@ -26,6 +26,9 @@ final readonly class BorderPart
         return new self($name, $this->color, $this->width, $this->style);
     }
 
+    /**
+     * @param non-empty-string $color A RGB color code
+     */
     public function withColor(string $color): self
     {
         return new self($this->name, $color, $this->width, $this->style);

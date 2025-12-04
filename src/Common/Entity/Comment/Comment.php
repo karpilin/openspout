@@ -42,32 +42,80 @@ final readonly class Comment
 
     public function withHeight(string $height): self
     {
-        return new self($height, $this->width, $this->marginLeft, $this->marginTop, $this->visible, $this->fillColor, $this->textRuns);
+        return new self(
+            $height,
+            $this->width,
+            $this->marginLeft,
+            $this->marginTop,
+            $this->visible,
+            $this->fillColor,
+            $this->textRuns
+        );
     }
 
     public function withWidth(string $width): self
     {
-        return new self($this->height, $width, $this->marginLeft, $this->marginTop, $this->visible, $this->fillColor, $this->textRuns);
+        return new self(
+            $this->height,
+            $width,
+            $this->marginLeft,
+            $this->marginTop,
+            $this->visible,
+            $this->fillColor,
+            $this->textRuns
+        );
     }
 
     public function withMarginLeft(string $marginLeft): self
     {
-        return new self($this->height, $this->width, $marginLeft, $this->marginTop, $this->visible, $this->fillColor, $this->textRuns);
+        return new self(
+            $this->height,
+            $this->width,
+            $marginLeft,
+            $this->marginTop,
+            $this->visible,
+            $this->fillColor,
+            $this->textRuns
+        );
     }
 
     public function withMarginTop(string $marginTop): self
     {
-        return new self($this->height, $this->width, $this->marginLeft, $marginTop, $this->visible, $this->fillColor, $this->textRuns);
+        return new self(
+            $this->height,
+            $this->width,
+            $this->marginLeft,
+            $marginTop,
+            $this->visible,
+            $this->fillColor,
+            $this->textRuns
+        );
     }
 
     public function withVisible(bool $visible): self
     {
-        return new self($this->height, $this->width, $this->marginLeft, $this->marginTop, $visible, $this->fillColor, $this->textRuns);
+        return new self(
+            $this->height,
+            $this->width,
+            $this->marginLeft,
+            $this->marginTop,
+            $visible,
+            $this->fillColor,
+            $this->textRuns
+        );
     }
 
     public function withFillColor(string $fillColor): self
     {
-        return new self($this->height, $this->width, $this->marginLeft, $this->marginTop, $this->visible, $fillColor, $this->textRuns);
+        return new self(
+            $this->height,
+            $this->width,
+            $this->marginLeft,
+            $this->marginTop,
+            $this->visible,
+            $fillColor,
+            $this->textRuns
+        );
     }
 
     /**
@@ -75,6 +123,14 @@ final readonly class Comment
      */
     public function withTextRuns(array $textRuns): self
     {
-        return new self($this->height, $this->width, $this->marginLeft, $this->marginTop, $this->visible, $this->fillColor, $textRuns);
+        return new self(
+            $this->height,
+            $this->width,
+            $this->marginLeft,
+            $this->marginTop,
+            $this->visible,
+            $this->fillColor,
+            $textRuns
+        );
     }
 }
