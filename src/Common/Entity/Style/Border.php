@@ -18,6 +18,11 @@ final readonly class Border
         $this->parts = $parts;
     }
 
+    public static function create(): self
+    {
+        return new self();
+    }
+
     public function getPart(BorderName $name): ?BorderPart
     {
         return $this->parts[$name->value] ?? null;
@@ -45,5 +50,20 @@ final readonly class Border
         unset($parts[$name->value]);
 
         return new self(...array_values($parts));
+    }
+
+    public function withBorderParts(BorderPart ...$borderParts): self
+    {
+        $parts = $this->parts;
+        foreach ($borderParts as $borderPart) {
+            $parts[$borderPart->name->value] = $borderPart;
+        }
+
+        return new self(...array_values($parts));
+    }
+
+    public function withoutBorderParts(): self
+    {
+        return new self();
     }
 }

@@ -26,6 +26,11 @@ final readonly class NumericCell extends Cell
         return $this->value;
     }
 
+    public static function create(float|int $value): self
+    {
+        return new self($value);
+    }
+
     public function withValue(float|int $value): self
     {
         return new self($value, $this->style, $this->comment);

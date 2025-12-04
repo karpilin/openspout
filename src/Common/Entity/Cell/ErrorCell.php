@@ -31,6 +31,11 @@ final readonly class ErrorCell extends Cell
         return $this->value;
     }
 
+    public static function create(string $value): self
+    {
+        return new self($value);
+    }
+
     public function withRawValue(string $value): self
     {
         return new self($value, $this->style, $this->comment);

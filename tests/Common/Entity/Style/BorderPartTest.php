@@ -46,4 +46,14 @@ final class BorderPartTest extends TestCase
         self::assertSame(BorderStyle::DASHED, $newPart->style);
         self::assertSame(BorderStyle::SOLID, $part->style);
     }
+
+    public function testBorderPartCreate(): void
+    {
+        $part = BorderPart::create(BorderName::LEFT);
+
+        self::assertSame(BorderName::LEFT, $part->name);
+        self::assertSame(Color::BLACK, $part->color);
+        self::assertSame(BorderWidth::MEDIUM, $part->width);
+        self::assertSame(BorderStyle::SOLID, $part->style);
+    }
 }

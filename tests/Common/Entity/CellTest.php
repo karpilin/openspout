@@ -202,4 +202,66 @@ final class CellTest extends TestCase
         self::assertSame($interval2, $newCell->getValue());
         self::assertSame($interval1, $cell->getValue());
     }
+
+    public function testStringCellCreate(): void
+    {
+        $cell = Cell\StringCell::create('test');
+
+        self::assertSame('test', $cell->getValue());
+        self::assertNull($cell->style);
+        self::assertNull($cell->comment);
+    }
+
+    public function testNumericCellCreate(): void
+    {
+        $cell = Cell\NumericCell::create(42);
+
+        self::assertSame(42, $cell->getValue());
+    }
+
+    public function testBooleanCellCreate(): void
+    {
+        $cell = Cell\BooleanCell::create(true);
+
+        self::assertTrue($cell->getValue());
+    }
+
+    public function testFormulaCellCreate(): void
+    {
+        $cell = Cell\FormulaCell::create('=SUM(A1:A2)');
+
+        self::assertSame('=SUM(A1:A2)', $cell->getValue());
+        self::assertNull($cell->getComputedValue());
+    }
+
+    public function testEmptyCellCreate(): void
+    {
+        $cell = Cell\EmptyCell::create();
+
+        self::assertNull($cell->getValue());
+    }
+
+    public function testErrorCellCreate(): void
+    {
+        $cell = Cell\ErrorCell::create('#DIV/0');
+
+        self::assertSame('#DIV/0', $cell->getRawValue());
+        self::assertNull($cell->getValue());
+    }
+
+    public function testDateTimeCellCreate(): void
+    {
+        $date = new DateTimeImmutable('2023-01-01');
+        $cell = Cell\DateTimeCell::create($date);
+
+        self::assertSame($date, $cell->getValue());
+    }
+
+    public function testDateIntervalCellCreate(): void
+    {
+        $interval = new DateInterval('P1D');
+        $cell = Cell\DateIntervalCell::create($interval);
+
+        self::assertSame($interval, $cell->getValue());
+    }
 }

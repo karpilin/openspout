@@ -76,4 +76,13 @@ final class CommentTest extends TestCase
         self::assertSame('World', $newComment->textRuns[0]->text);
         self::assertSame('Hello', $comment->textRuns[0]->text);
     }
+
+    public function testCommentCreate(): void
+    {
+        $comment = Comment::create();
+
+        self::assertSame('55.5pt', $comment->height);
+        self::assertSame('96pt', $comment->width);
+        self::assertFalse($comment->visible);
+    }
 }

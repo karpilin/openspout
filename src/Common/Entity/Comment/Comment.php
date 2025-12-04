@@ -35,6 +35,11 @@ final readonly class Comment
         }
     }
 
+    public static function create(): self
+    {
+        return new self();
+    }
+
     public function withHeight(string $height): self
     {
         return new self($height, $this->width, $this->marginLeft, $this->marginTop, $this->visible, $this->fillColor, $this->textRuns);

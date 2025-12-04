@@ -64,4 +64,16 @@ final class TextRunTest extends TestCase
         self::assertTrue($newTextRun->italic);
         self::assertFalse($textRun->italic);
     }
+
+    public function testTextRunCreate(): void
+    {
+        $textRun = TextRun::create('Hello');
+
+        self::assertSame('Hello', $textRun->text);
+        self::assertSame(10, $textRun->fontSize);
+        self::assertSame('000000', $textRun->fontColor);
+        self::assertSame('Tahoma', $textRun->fontName);
+        self::assertFalse($textRun->bold);
+        self::assertFalse($textRun->italic);
+    }
 }

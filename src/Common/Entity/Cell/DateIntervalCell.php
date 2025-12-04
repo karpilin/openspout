@@ -33,6 +33,11 @@ final readonly class DateIntervalCell extends Cell
         return $this->value;
     }
 
+    public static function create(DateInterval $value): self
+    {
+        return new self($value);
+    }
+
     public function withValue(DateInterval $value): self
     {
         return new self($value, $this->style, $this->comment);
