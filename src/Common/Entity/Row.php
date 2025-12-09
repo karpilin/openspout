@@ -89,7 +89,7 @@ final readonly class Row
     /**
      * @param list<null|bool|DateInterval|DateTimeInterface|float|int|string> $cellValues
      */
-    public static function fromValues(array $cellValues, float $height = 0): self
+    public static function fromValues(array $cellValues, float $height = self::DEFAULT_HEIGHT): self
     {
         $cells = array_map(static function (bool|DateInterval|DateTimeInterface|float|int|string|null $cellValue): Cell {
             return Cell::fromValue($cellValue);
@@ -102,7 +102,7 @@ final readonly class Row
      * @param array<non-negative-int, null|bool|DateInterval|DateTimeInterface|float|int|string> $cellValues
      * @param array<non-negative-int, Style>                                                     $columnStyles
      */
-    public static function fromValuesWithStyles(array $cellValues, array $columnStyles, float $height = 0): self
+    public static function fromValuesWithStyles(array $cellValues, array $columnStyles, float $height = self::DEFAULT_HEIGHT): self
     {
         $cells = array_map(static function (bool|DateInterval|DateTimeInterface|float|int|string|null $cellValue, int|string $key) use ($columnStyles): Cell {
             return Cell::fromValue($cellValue, $columnStyles[$key] ?? null);
