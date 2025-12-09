@@ -9,11 +9,15 @@ namespace OpenSpout\Common\Entity\Comment;
  */
 final readonly class TextRun
 {
+    public const int DEFAULT_FONT_SIZE = 10;
+    public const string DEFAULT_FONT_COLOR = '000000';
+    public const string DEFAULT_FONT_NAME = 'Tahoma';
+
     public function __construct(
         public string $text,
-        public int $fontSize = 10,
-        public string $fontColor = '000000',
-        public string $fontName = 'Tahoma',
+        public int $fontSize = self::DEFAULT_FONT_SIZE,
+        public string $fontColor = self::DEFAULT_FONT_COLOR,
+        public string $fontName = self::DEFAULT_FONT_NAME,
         public bool $bold = false,
         public bool $italic = false,
     ) {}

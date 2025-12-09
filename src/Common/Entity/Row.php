@@ -11,12 +11,14 @@ use OpenSpout\Common\Entity\Style\Style;
 
 final readonly class Row
 {
+    public const float DEFAULT_HEIGHT = 0;
+
     /**
      * @param array<non-negative-int, Cell> $cells
      */
     public function __construct(
         public array $cells,
-        public float $height = 0,
+        public float $height = self::DEFAULT_HEIGHT,
     ) {
         foreach ($this->cells as $index => $cell) {
             if (!\is_int($index) || 0 > $index) {
