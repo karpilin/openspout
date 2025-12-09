@@ -67,12 +67,12 @@ final class BorderTest extends TestCase
         self::assertSame(Color::BLACK, $border->getPart(BorderName::LEFT)?->color);
     }
 
-    public function testBorderWithoutBorderPart(): void
+    public function testBorderWithoutBorder(): void
     {
         $leftPart = new BorderPart(BorderName::LEFT);
         $rightPart = new BorderPart(BorderName::RIGHT);
         $border = new Border($leftPart, $rightPart);
-        $newBorder = $border->withoutBorderPart(BorderName::LEFT);
+        $newBorder = $border->withoutBorder(BorderName::LEFT);
 
         self::assertCount(1, $newBorder->getParts());
         self::assertNull($newBorder->getPart(BorderName::LEFT));
@@ -94,17 +94,6 @@ final class BorderTest extends TestCase
         self::assertNotNull($newBorder->getPart(BorderName::RIGHT));
         self::assertNotNull($newBorder->getPart(BorderName::TOP));
         self::assertCount(1, $border->getParts());
-    }
-
-    public function testBorderWithoutBorderParts(): void
-    {
-        $leftPart = new BorderPart(BorderName::LEFT);
-        $rightPart = new BorderPart(BorderName::RIGHT);
-        $border = new Border($leftPart, $rightPart);
-        $newBorder = $border->withoutBorderParts();
-
-        self::assertCount(0, $newBorder->getParts());
-        self::assertCount(2, $border->getParts());
     }
 
     public function testBorderCreate(): void

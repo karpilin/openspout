@@ -128,6 +128,26 @@ final class CellTest extends TestCase
         self::assertFalse($cell->comment->visible);
     }
 
+    public function testStringCellWithoutStyle(): void
+    {
+        $style = new Style(fontBold: true);
+        $cell = new StringCell('test', $style, null);
+        $newCell = $cell->withoutStyle();
+
+        self::assertNull($newCell->style);
+        self::assertNotNull($cell->style);
+    }
+
+    public function testStringCellWithoutComment(): void
+    {
+        $comment = new Comment();
+        $cell = new StringCell('test', null, $comment);
+        $newCell = $cell->withoutComment();
+
+        self::assertNull($newCell->comment);
+        self::assertNotNull($cell->comment);
+    }
+
     public function testNumericCellWithValue(): void
     {
         $cell = new NumericCell(42, null, null);

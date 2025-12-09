@@ -44,7 +44,7 @@ final readonly class Border
         return new self(...array_values($parts));
     }
 
-    public function withoutBorderPart(BorderName $name): self
+    public function withoutBorder(BorderName $name): self
     {
         $parts = $this->parts;
         unset($parts[$name->value]);
@@ -60,10 +60,5 @@ final readonly class Border
         }
 
         return new self(...array_values($parts));
-    }
-
-    public function withoutBorderParts(): self
-    {
-        return new self();
     }
 }

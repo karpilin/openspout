@@ -46,13 +46,23 @@ final readonly class FormulaCell extends Cell
         return new self($this->value, $computedValue, $this->style, $this->comment);
     }
 
-    public function withStyle(?Style $style): self
+    public function withStyle(Style $style): self
     {
         return new self($this->value, $this->computedValue, $style, $this->comment);
     }
 
-    public function withComment(?Comment $comment): self
+    public function withoutStyle(): self
+    {
+        return new self($this->value, $this->computedValue, null, $this->comment);
+    }
+
+    public function withComment(Comment $comment): self
     {
         return new self($this->value, $this->computedValue, $this->style, $comment);
+    }
+
+    public function withoutComment(): self
+    {
+        return new self($this->value, $this->computedValue, $this->style, null);
     }
 }
