@@ -13,7 +13,7 @@ final class BorderPartTest extends TestCase
 {
     public function testBorderPartWithName(): void
     {
-        $part = new BorderPart(BorderName::LEFT);
+        $part = BorderPart::create(BorderName::LEFT);
         $newPart = $part->withName(BorderName::RIGHT);
 
         self::assertSame(BorderName::RIGHT, $newPart->name);
@@ -22,7 +22,7 @@ final class BorderPartTest extends TestCase
 
     public function testBorderPartWithColor(): void
     {
-        $part = new BorderPart(BorderName::LEFT, Color::BLACK);
+        $part = BorderPart::create(BorderName::LEFT);
         $newPart = $part->withColor(Color::RED);
 
         self::assertSame(Color::RED, $newPart->color);
@@ -31,7 +31,7 @@ final class BorderPartTest extends TestCase
 
     public function testBorderPartWithWidth(): void
     {
-        $part = new BorderPart(BorderName::LEFT, Color::BLACK, BorderWidth::THIN);
+        $part = BorderPart::create(BorderName::LEFT)->withWidth(BorderWidth::THIN);
         $newPart = $part->withWidth(BorderWidth::THICK);
 
         self::assertSame(BorderWidth::THICK, $newPart->width);
@@ -40,7 +40,7 @@ final class BorderPartTest extends TestCase
 
     public function testBorderPartWithStyle(): void
     {
-        $part = new BorderPart(BorderName::LEFT, Color::BLACK, BorderWidth::MEDIUM, BorderStyle::SOLID);
+        $part = BorderPart::create(BorderName::LEFT);
         $newPart = $part->withStyle(BorderStyle::DASHED);
 
         self::assertSame(BorderStyle::DASHED, $newPart->style);

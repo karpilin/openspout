@@ -13,7 +13,7 @@ final class TextRunTest extends TestCase
 {
     public function testTextRunWithText(): void
     {
-        $textRun = new TextRun('Hello');
+        $textRun = TextRun::create('Hello');
         $newTextRun = $textRun->withText('World');
 
         self::assertSame('World', $newTextRun->text);
@@ -22,7 +22,7 @@ final class TextRunTest extends TestCase
 
     public function testTextRunWithFontSize(): void
     {
-        $textRun = new TextRun('Test', fontSize: 10);
+        $textRun = TextRun::create('Test');
         $newTextRun = $textRun->withFontSize(14);
 
         self::assertSame(14, $newTextRun->fontSize);
@@ -31,7 +31,7 @@ final class TextRunTest extends TestCase
 
     public function testTextRunWithFontColor(): void
     {
-        $textRun = new TextRun('Test', fontColor: '000000');
+        $textRun = TextRun::create('Test');
         $newTextRun = $textRun->withFontColor('FF0000');
 
         self::assertSame('FF0000', $newTextRun->fontColor);
@@ -40,7 +40,7 @@ final class TextRunTest extends TestCase
 
     public function testTextRunWithFontName(): void
     {
-        $textRun = new TextRun('Test', fontName: 'Arial');
+        $textRun = TextRun::create('Test')->withFontName('Arial');
         $newTextRun = $textRun->withFontName('Times New Roman');
 
         self::assertSame('Times New Roman', $newTextRun->fontName);
@@ -49,7 +49,7 @@ final class TextRunTest extends TestCase
 
     public function testTextRunWithBold(): void
     {
-        $textRun = new TextRun('Test', bold: false);
+        $textRun = TextRun::create('Test');
         $newTextRun = $textRun->withBold(true);
 
         self::assertTrue($newTextRun->bold);
@@ -58,7 +58,7 @@ final class TextRunTest extends TestCase
 
     public function testTextRunWithItalic(): void
     {
-        $textRun = new TextRun('Test', italic: false);
+        $textRun = TextRun::create('Test');
         $newTextRun = $textRun->withItalic(true);
 
         self::assertTrue($newTextRun->italic);
