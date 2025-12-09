@@ -29,7 +29,7 @@ abstract readonly class Cell
         bool|DateInterval|DateTimeInterface|float|int|string|null $value,
         ?Style $style = null,
         ?Comment $comment = null,
-    ): self {
+    ): static {
         if (\is_bool($value)) {
             return new BooleanCell($value, $style, $comment);
         }
